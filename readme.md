@@ -148,6 +148,9 @@ public class TestController {
 - Configure the Otel Agent using environment variables or system properties in your Spring Boot application.
 - The Otel Agent automatically generates and propagates unique trace IDs and span IDs to each request as it moves through the application.
 - Verify that the Spring Boot application successfully generates and propagates trace IDs and span IDs.
+- To run the code, make sure you build the code using gradle, and then use docker compose `docker compose up -d` to start the containers.
+  Replace the open search url parameters defined in the pipelines.yaml custom to your AWS account.
+
 
 ### 6. Visualizing Traces in AWS Opensearch:
 
