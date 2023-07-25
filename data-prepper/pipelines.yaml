@@ -1,0 +1,31 @@
+entry-pipeline:
+  delay: "100"
+  source:
+    otel_trace_source:
+      ssl: false
+  sink:
+    - pipeline:
+        name: "raw-pipeline"
+    - pipeline:
+        name: "service-map-pipeline"
+raw-pipeline:
+  source:
+    pipeline:
+      name: "entry-pipeline"
+  sink:
+    - opensearch:
+        hosts: [ "https://opensearchhost:443" ]
+        username: "username"
+        password: "password"
+        index_type: "trace-analytics-raw"
+service-map-pipeline:
+  delay: "100"
+  source:
+    pipeline:
+      name: "entry-pipeline"
+  sink:
+    - opensearch:
+        hosts: [ "https://opensearchhost:443" ]
+        username: "username"
+        password: "password"
+        index_type: "trace-analytics-service-map"

@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  data-prepper:
+    restart: unless-stopped
+    container_name: data-prepper
+    image: opensearchproject/data-prepper:latest
+    volumes:
+       - ./data-prepper/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
+       - ./data-prepper/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
+    ports:
+      - "21890:21890"
+
+  otel-collector:
+    restart: unless-stopped
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otel-collector-config.yml"]
+    volumes:
+      - ./otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yml
+    ports:
+      - "55680:55680"
+      - "9411:9411"
+    depends_on:
+      - data-prepper
+
+  demo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      AGENT_FILE: "/app/opentelemetry-javaagent.jar"
+      OTEL_TRACES_EXPORTER: "otlp,logging"
+      OTEL_METRICS_EXPORTER: "none"
+      OTEL_LOGS_EXPORTER: "logging"
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://otel-collector:55680/v1/traces"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=demo-otel-app,service.version=1.0"
