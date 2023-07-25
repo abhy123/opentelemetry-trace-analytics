@@ -1,4 +1,4 @@
-# Leveraging AWS OpenSearch for Trace Analytics
+# Leveraging AWS OpenSearch for Trace Analytics with OpenTelemetry
 
 ### Introduction:
 
