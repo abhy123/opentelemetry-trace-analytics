@@ -160,11 +160,20 @@ Explore the powerful querying capabilities of AWS Opensearch to gain valuable in
 
 - Use Kibana, the data visualization tool for AWS Opensearch, to create custom dashboards and visualize trace data.
 - Create queries to filter and analyze traces based on specific criteria like service name, latency, or error codes.
-- Screenshots are added in the images folder.
+- Screenshots are added below : 
 
-Architecture :
+![alt text](https://github.com/abhy123/opentelemetry-trace-analytics/blob/main/images/Screenshot%202023-07-25%20at%204.57.39%20PM.png)
 
-Architecture diagram image added in images folder.
+![alt text](https://github.com/abhy123/opentelemetry-trace-analytics/blob/main/images/Screenshot%202023-07-25%20at%204.57.50%20PM.png)
+
+![alt text](https://github.com/abhy123/opentelemetry-trace-analytics/blob/main/images/Screenshot%202023-07-25%20at%204.58.00%20PM.png)
+
+![alt text](https://github.com/abhy123/opentelemetry-trace-analytics/blob/main/images/Screenshot%202023-07-25%20at%204.58.11%20PM.png)
+
+
+### Architecture :
+
+![alt text](https://github.com/abhy123/opentelemetry-trace-analytics/blob/main/images/otel-Page-2.drawio.png)
 
 
 - OTEL Demo Spring Boot App: The OpenTelemetry Agent is integrated into this spring boot application to automatically instrument and collect trace data.
